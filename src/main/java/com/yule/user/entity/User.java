@@ -1,0 +1,44 @@
+package com.yule.user.entity;
+
+import org.apache.ibatis.type.Alias;
+
+/**
+ * 用户实体
+ *
+ * @author yule
+ * @date 2018/8/6 21:51
+ */
+public class User {
+    private String id;
+    private String name;
+    private String age;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return this.id + " " + this.name + " " + this.age;
+    }
+}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--属性，property 子元素-->
+    <!--<properties>-->
+        <!--<property name="driver" value="oracle.jdbc.OracleDriver"/>-->
+        <!--<property name="datasourceurl" value="jdbc:oracle:thin:@localhost:1521:ORCL"/>-->
+        <!--<property name="username" value="testdev"/>-->
+        <!--<property name="password" value="test1234"/>-->
+    <!--</properties>-->
+
+    <properties resource="config/system/db.properties"/>
+
+    <!--定义别名-->
+    <typeAliases>
+        <!--<typeAlias type="com.yule.user.entity.User" alias="user"/>-->
+        <package name="com.yule.user.entity"/>
+    </typeAliases>
+
+    <!--自定义类型处理器-->
+    <typeHandlers>
+        <typeHandler javaType="string" jdbcType="VARCHAR" handler="com.yule.mybatis.typehandler.MyStringTypeHandler" />
+        <!--<package name="com.yule.mybatis.typehandler"/>-->
+    </typeHandlers>
+
+    <!--自定义对象工厂-->
+    <!--<objectFactory type="com.yule.mybatis.objectfactory.MyObjectFactory">-->
+        <!--<property name="name" value="MyObjectFactory"/>-->
+    <!--</objectFactory>-->
+
+    <!--配置环境-->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC">
+                <property name="autoCommit" value="false"/>
+            </transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${datasourceurl}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 引入映射器 的几种方式 -->
+    <mappers>
+        <!--使用类注册引入-->
+        <!--<mapper class="com.yule.user.dao.UserDao"/>-->
+        <!--使用文件路径引入-->
+        <mapper resource="com/yule/user/dao/UserDao.xml"/>
+        <!--使用包名引入映射器-->
+        <!--<package name="com.yule.user.dao"/>-->
+        <!--使用 userDao.xml 引入-->
+        <!--<mapper url="file:F:\IDEAworkspace\sdemo\src\main\java\com\yule\user\dao\UserDao.xml"/>-->
+    </mappers>
+
+</configuration>
