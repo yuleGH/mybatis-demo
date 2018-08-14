@@ -21,10 +21,10 @@
     </typeAliases>
 
     <!--自定义类型处理器-->
-    <typeHandlers>
-        <typeHandler javaType="string" jdbcType="VARCHAR" handler="com.yule.mybatis.typehandler.MyStringTypeHandler" />
-        <!--<package name="com.yule.mybatis.typehandler"/>-->
-    </typeHandlers>
+    <!--<typeHandlers>-->
+        <!--<typeHandler javaType="string" jdbcType="VARCHAR" handler="com.yule.mybatis.typehandler.MyStringTypeHandler" />-->
+        <!--&lt;!&ndash;<package name="com.yule.mybatis.typehandler"/>&ndash;&gt;-->
+    <!--</typeHandlers>-->
 
     <!--自定义对象工厂-->
     <!--<objectFactory type="com.yule.mybatis.objectfactory.MyObjectFactory">-->
