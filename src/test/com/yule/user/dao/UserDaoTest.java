@@ -11,44 +11,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
 public class UserDaoTest {
 
     private static SqlSessionFactory sqlSessionFactory;
-
-    @Test
-    public void testQueryUserList() throws IOException {
-
-        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
-
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-
-        UserDao userDao = sqlSession.getMapper(UserDao.class);
-        List<User> userList = userDao.queryUserList();
-
-        for (User user : userList) {
-            System.out.println(user.toString());
-        }
-
-        sqlSession.close();
-    }
-
-    @Test
-    public void testQueryUserByName() throws IOException {
-
-        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
-
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-
-        UserDao userDao = sqlSession.getMapper(UserDao.class);
-        User user = userDao.queryUserByName("yule");
-
-        System.out.println(user.toString());
-
-        sqlSession.close();
-    }
 
     private static SqlSessionFactory getSqlSessionFactory() {
         //单例
@@ -90,5 +60,90 @@ public class UserDaoTest {
     private String decode(Object username) {
         return username.toString();
     }
+
+    @Test
+    public void test(){
+
+    }
+
+    @Test
+    public void testQueryUserList() throws IOException {
+
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        UserDao userDao = sqlSession.getMapper(UserDao.class);
+        List<User> userList = userDao.queryUserList();
+
+        for (User user : userList) {
+            System.out.println(user);
+        }
+
+        sqlSession.close();
+    }
+
+    @Test
+    public void testQueryUserByName() throws IOException {
+
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        UserDao userDao = sqlSession.getMapper(UserDao.class);
+        User user = userDao.queryUserByName("yule");
+
+        System.out.println(user);
+
+        sqlSession.close();
+    }
+
+    @Test
+    public void testInsertUser(){
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        UserDao mapper = sqlSession.getMapper(UserDao.class);
+
+        User user = new User("你说", "33");
+
+        int i = mapper.insertUser(user);
+
+        System.out.println(i);
+        sqlSession.commit();
+        sqlSession.close();
+
+        System.out.println(user);
+    }
+
+    @Test
+    public void testUpdateUserById(){
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        UserDao userDao = sqlSession.getMapper(UserDao.class);
+        User user = new User("4", "xiao", "34");
+        int count = userDao.updateUserById(user);
+
+        user = userDao.queryUserById("4");
+        sqlSession.commit();
+        sqlSession.close();
+
+        System.out.println(count);
+        System.out.println(user);
+    }
+
+    @Test
+    public void testDeleteUserById(){
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        UserDao userDao = sqlSession.getMapper(UserDao.class);
+        int count = userDao.deleteUserById("4");
+        User user = userDao.queryUserById("4");
+        sqlSession.commit();
+        sqlSession.close();
+
+        System.out.println(count);
+        System.out.println(user);
+    }
+
 
 }
