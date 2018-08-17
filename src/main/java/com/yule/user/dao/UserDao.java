@@ -45,10 +45,10 @@ public interface UserDao {
      */
     int updateUserById(User user);
 
-        /**
-         * 删除
-         * @param id
-         * @return
-         */
-        int deleteUserById(String id);
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
+    int deleteUserById(String id);
 }

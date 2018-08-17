@@ -91,7 +91,20 @@ public class UserDaoTest {
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
         UserDao userDao = sqlSession.getMapper(UserDao.class);
-        User user = userDao.queryUserByName("yule");
+        User user = userDao.queryUserByName("xiaoxiao");
+
+        System.out.println(user);
+
+        sqlSession.close();
+    }
+
+    @Test
+    public void testQueryUserByName2(){
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        User user = sqlSession.selectOne("com.yule.user.dao.UserDao.queryUserByName", "xiaoxiao");
 
         System.out.println(user);
 

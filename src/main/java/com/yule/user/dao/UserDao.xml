@@ -3,13 +3,30 @@
 <mapper namespace="com.yule.user.dao.UserDao">
 
     <select id="queryUserList" resultType="User" >
-        select t.id, t.name, t.age from t_user t
+        <include refid="common_query">
+            <property name="columnsName" value="user_columns"/>
+        </include>
     </select>
 
+    <sql id="user_columns">
+        ${prefix}.id, ${prefix}.name, ${prefix}.age
+    </sql>
     <select id="queryUserByName" resultType="com.yule.user.entity.User">
-        select t.id, t.name, t.age from t_user t
+        select
+          <include refid="user_columns">
+              <property name="prefix" value="t"/>
+          </include>
+        from t_user t
         where t.name = #{name,jdbcType=VARCHAR}
     </select>
+
+    <sql id="common_query">
+        select
+        <include refid="${columnsName}">
+              <property name="prefix" value="t"/>
+        </include>
+        from t_user t
+    </sql>
 
     <select id="queryUserById" resultType="com.yule.user.entity.User">
          select t.id, t.name, t.age from t_user t
