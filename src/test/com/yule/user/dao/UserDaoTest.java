@@ -158,5 +158,15 @@ public class UserDaoTest {
         System.out.println(user);
     }
 
+    @Test
+    public void testQueryUserById(){
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        UserDao userDao = sqlSession.getMapper(UserDao.class);
+        User user = userDao.queryUserById("4");
+        System.out.println(user);
+        sqlSession.close();
+    }
+
 
 }

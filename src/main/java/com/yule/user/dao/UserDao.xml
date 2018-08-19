@@ -2,6 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.yule.user.dao.UserDao">
 
+    <!--resultMap-->
+    <resultMap id="userResultMap" type="com.yule.user.entity.User">
+        <constructor>
+            <idArg column="id" javaType="string"/>
+            <arg column="name" javaType="string"/>
+            <arg column="age" javaType="string"/>
+        </constructor>
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+    </resultMap>
+
     <select id="queryUserList" resultType="User" >
         <include refid="common_query">
             <property name="columnsName" value="user_columns"/>
@@ -28,7 +40,7 @@
         from t_user t
     </sql>
 
-    <select id="queryUserById" resultType="com.yule.user.entity.User">
+    <select id="queryUserById" resultMap="userResultMap">
          select t.id, t.name, t.age from t_user t
         where t.id = #{id}
     </select>
